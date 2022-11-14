@@ -48,7 +48,7 @@ test:
     - test -f $PREFIX/lib/pkgconfig/dcmtk.pc  # [unix]
     - if not exist %LIBRARY_LIB%\\pkgconfig\\dcmtk.pc exit 1  # [win]
     - test -f $PREFIX/lib/cmake/dcmtk/DCMTKConfig.cmake  # [unix]
-    - if not exist %LIBRARY_LIB%\\cmake\\DCMTKConfig.cmake exit 1  # [win]
+    - if not exist %LIBRARY_PREFIX%\\cmake\\DCMTKConfig.cmake exit 1  # [win]
 
 about:
   home: http://dicom.offis.de
