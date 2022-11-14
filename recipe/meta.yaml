@@ -17,7 +17,7 @@ source:
   sha256: 7c58298e3e8d60232ee6fc8408cfadd14463cc11a3c4ca4c59af5988c7e9710a
 
 build:
-  number: 1
+  number: 2
   run_exports:
     - {{ pin_subpackage(name|lower, max_pin='x.x') }}
 
@@ -38,17 +38,17 @@ test:
   commands:
     - dcmdump --help
     - test -f $PREFIX/include/dcmtk/ofstd/ofstd.h  # [unix]
-    - if not exist %PREFIX%\\include\\dcmtk\\ofstd\\ofstd.h exit 1  # [win]
+    - if not exist %LIBRARY_INC%\\dcmtk\\ofstd\\ofstd.h exit 1  # [win]
     {% for library in libraries %}
     - test -f $PREFIX/lib/lib{{ library }}.so.{{ SO_MAJOR }}  # [linux]
     - test -f $PREFIX/lib/lib{{ library }}.{{ SO_MAJOR }}.dylib  # [mac]
-    - if not exist %PREFIX%\\bin\\{{ library }}.dll exit 1  # [win]
-    - if not exist %PREFIX%\\lib\\{{ library }}.lib exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\{{ library }}.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\{{ library }}.lib exit 1  # [win]
     {% endfor %}
     - test -f $PREFIX/lib/pkgconfig/dcmtk.pc  # [unix]
-    - if not exist %PREFIX%\\lib\\pkgconfig\\dcmtk.pc exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\pkgconfig\\dcmtk.pc exit 1  # [win]
     - test -f $PREFIX/lib/cmake/dcmtk/DCMTKConfig.cmake  # [unix]
-    - if not exist %PREFIX%\\cmake\\DCMTKConfig.cmake exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\cmake\\DCMTKConfig.cmake exit 1  # [win]
 
 about:
   home: http://dicom.offis.de
