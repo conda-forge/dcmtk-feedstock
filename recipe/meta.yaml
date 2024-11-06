@@ -1,5 +1,5 @@
 {% set name = "DCMTK" %}
-{% set version = "3.6.7" %}
+{% set version = "3.6.8" %}
 {% set libraries = [
   "ofstd", "oflog", "dcmdata", "i2d", "dcmimgle", "dcmimage", "ijg8", "ijg12",
   "ijg16", "dcmjpeg", "dcmtkcharls", "dcmjpls", "dcmnet", "dcmtls", "dcmsr",
@@ -14,10 +14,10 @@ package:
 
 source:
   url: https://dicom.offis.de/download/dcmtk/dcmtk{{ version | replace('.','') }}/dcmtk-{{ version }}.tar.gz
-  sha256: 7c58298e3e8d60232ee6fc8408cfadd14463cc11a3c4ca4c59af5988c7e9710a
+  sha256: 232076655503138debf2f624109f1799e539354f186ce4e04b27cf82a9d8720f
 
 build:
-  number: 5
+  number: 0
   run_exports:
     - {{ pin_subpackage(name|lower, max_pin='x.x') }}
 
