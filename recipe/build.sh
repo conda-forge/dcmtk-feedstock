@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./config
 
 mkdir build
 cd build
@@ -6,7 +8,7 @@ cd build
 # NOTE: as of 3.6.7,
 # - sndfile is used by dcmwave, which is not in the public repository
 # - openjpeg is unused
-cmake \
+cmake ${CMAKE_ARGS} \
     -G Ninja \
     -D CMAKE_BUILD_TYPE:STRING=Release \
     -D BUILD_SHARED_LIBS:BOOL=TRUE \
