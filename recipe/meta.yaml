@@ -63,6 +63,7 @@ about:
     and C++. 
   license: BSD-3-Clause
   license_file: COPYRIGHT
+  # can be cloned from https://git.dcmtk.org/dcmtk
   dev_url: "https://git.dcmtk.org/"
 
 extra:
