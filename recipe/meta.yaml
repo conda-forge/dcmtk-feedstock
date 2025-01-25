@@ -20,6 +20,11 @@ source:
     # only on windows because either style is incompatible for the other platforms, see
     # https://github.com/conda-forge/libtiff-feedstock/pull/110
     - patches/0001-link-to-TIFF-tiff-directly.patch  # [win]
+    # a core header (arith.h) needs to be compiled (from arith.cc), based on various CMake tests
+    # (yes, it's upside down world), see CMake/GenerateDCMTKConfigure.cmake in the upstream sources;
+    # because it further tries to be clever in cross-compilation, things hit the wrong architecture
+    # when we compile for osx-arm; instead just use the (already cross-capable) compiler setup to run.
+    - patches/0002-use-regular-try_run-in-x-compilation-instead-of-hand.patch
 
 build:
   number: 5
