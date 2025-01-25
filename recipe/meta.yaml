@@ -15,6 +15,11 @@ package:
 source:
   url: https://dicom.offis.de/download/dcmtk/dcmtk{{ version | replace('.','') }}/dcmtk-{{ version }}.tar.gz
   sha256: 7c58298e3e8d60232ee6fc8408cfadd14463cc11a3c4ca4c59af5988c7e9710a
+  patches:
+    # CMake doesn't add tiff library to linker on windows for some reason; apply the patch
+    # only on windows because either style is incompatible for the other platforms, see
+    # https://github.com/conda-forge/libtiff-feedstock/pull/110
+    - patches/0001-link-to-TIFF-tiff-directly.patch  # [win]
 
 build:
   number: 5
