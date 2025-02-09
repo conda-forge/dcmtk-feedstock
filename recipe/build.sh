@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -xe
+
 mkdir build
 cd build
 
@@ -18,5 +20,5 @@ cmake \
     -D DCMTK_WITH_SNDFILE:BOOL=OFF \
     ..
 
-cmake --build . --target install --parallel
+cmake --build . --target install --parallel ${CPU_COUNT}
 

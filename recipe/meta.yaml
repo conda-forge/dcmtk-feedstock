@@ -15,14 +15,25 @@ package:
 source:
   url: https://dicom.offis.de/download/dcmtk/dcmtk{{ version | replace('.','') }}/dcmtk-{{ version }}.tar.gz
   sha256: 7c58298e3e8d60232ee6fc8408cfadd14463cc11a3c4ca4c59af5988c7e9710a
+  patches:
+    # CMake doesn't add tiff library to linker on windows for some reason; apply the patch
+    # only on windows because either style is incompatible for the other platforms, see
+    # https://github.com/conda-forge/libtiff-feedstock/pull/110
+    - patches/0001-link-to-TIFF-tiff-directly.patch  # [win]
+    # a core header (arith.h) needs to be compiled (from arith.cc), based on various CMake tests
+    # (yes, it's upside down world), see CMake/GenerateDCMTKConfigure.cmake in the upstream sources;
+    # because it further tries to be clever in cross-compilation, things hit the wrong architecture
+    # when we compile for osx-arm; instead just use the (already cross-capable) compiler setup to run.
+    - patches/0002-use-regular-try_run-in-x-compilation-instead-of-hand.patch
 
 build:
-  number: 5
+  number: 6
   run_exports:
     - {{ pin_subpackage(name|lower, max_pin='x.x') }}
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - cmake
@@ -62,8 +73,10 @@ about:
     and C++. 
   license: BSD-3-Clause
   license_file: COPYRIGHT
+  # can be cloned from https://git.dcmtk.org/dcmtk
   dev_url: "https://git.dcmtk.org/"
 
 extra:
   recipe-maintainers:
     - lamyj
+    - martin-g
