@@ -6,7 +6,7 @@
   "cmr", "dcmdsig", "dcmwlm", "dcmqrdb", "dcmpstat", "dcmrt", "dcmiod",
   "dcmfg", "dcmseg", "dcmtract", "dcmpmap", "dcmect" ]
 %}
-{% set SO_MAJOR = "17" %}
+{% set SO_MAJOR = "19" %}
 
 package:
   name: {{ name | lower }}
