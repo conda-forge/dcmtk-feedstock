@@ -1,23 +1,12 @@
-From 6574a771447aa5feb7a6264ec266380fda59e22b Mon Sep 17 00:00:00 2001
-From: "H. Vetinari" <h.vetinari@gmx.com>
-Date: Sat, 25 Jan 2025 18:19:03 +1100
-Subject: [PATCH 2/2] use regular try_run in x-compilation instead of
- hand-spinning one
-
----
- CMake/dcmtkTryRun.cmake | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/CMake/dcmtkTryRun.cmake b/CMake/dcmtkTryRun.cmake
-index 86f7bd8b2..78c2ae704 100644
---- a/CMake/dcmtkTryRun.cmake
-+++ b/CMake/dcmtkTryRun.cmake
-@@ -86,7 +86,7 @@ endfunction()
+--- a/CMake/dcmtkTryRun.cmake	2025-08-01 13:20:42.279096425 -0400
++++ b/CMake/dcmtkTryRun.cmake	2025-08-01 13:22:01.651152402 -0400
+@@ -73,7 +73,7 @@
  
  macro(DCMTK_TRY_RUN)
-     if(CMAKE_CROSSCOMPILING)
+     if(CMAKE_CROSSCOMPILING AND NOT CMAKE_CROSSCOMPILING_EMULATOR)
 -        DCMTK_TRY_RUN_CROSS(${ARGN})
 +        try_run(${ARGN})
      else()
          try_run(${ARGN})
      endif()
+
