@@ -1,22 +1,17 @@
-From d3910453cfec968f6d29016d2501a14a26e6e3fa Mon Sep 17 00:00:00 2001
-From: "H. Vetinari" <h.vetinari@gmx.com>
-Date: Sat, 25 Jan 2025 16:17:25 +1100
-Subject: [PATCH 1/2] link to `TIFF::tiff` directly
-
----
- CMake/3rdparty.cmake | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/CMake/3rdparty.cmake b/CMake/3rdparty.cmake
-index 47e34763b..6cc73daa8 100644
---- a/CMake/3rdparty.cmake
-+++ b/CMake/3rdparty.cmake
-@@ -38,7 +38,7 @@ if(DCMTK_USE_FIND_PACKAGE)
+--- a/CMake/3rdparty.cmake	2025-08-01 13:14:04.298815621 -0400
++++ b/CMake/3rdparty.cmake	2025-08-01 13:14:16.926824534 -0400
+@@ -38,11 +38,11 @@
+       if(NOT JPEG_FOUND)
+         message(STATUS "Info: DCMTK TIFF support will be enabled (but without JPEG)")
+         include_directories(${TIFF_INCLUDE_DIR})
+-        set(LIBTIFF_LIBS ${TIFF_LIBRARIES} ${TIFF_EXTRA_LIBS_STATIC})
++        set(LIBTIFF_LIBS TIFF::tiff)
+       else()
          message(STATUS "Info: DCMTK TIFF support will be enabled")
          include_directories(${TIFF_INCLUDE_DIR} ${JPEG_INCLUDE_DIR})
+-        set(LIBTIFF_LIBS ${TIFF_LIBRARIES} ${TIFF_EXTRA_LIBS_STATIC} ${JPEG_LIBRARIES})
++        set(LIBTIFF_LIBS TIFF::tiff ${JPEG_LIBRARY})
        endif()
--      set(LIBTIFF_LIBS ${TIFF_LIBRARY} ${TIFF_EXTRA_LIBS_STATIC} ${JPEG_LIBRARY})
-+      set(LIBTIFF_LIBS TIFF::tiff ${JPEG_LIBRARY})
      endif()
    endif()
- 
+
