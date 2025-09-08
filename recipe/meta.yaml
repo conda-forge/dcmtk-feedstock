@@ -22,7 +22,7 @@ source:
     - patches/0001-link-to-TIFF-tiff-directly.patch  # [win]
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage(name|lower, max_pin='x.x') }}
 
@@ -36,7 +36,7 @@ requirements:
   host:
     - libpng
     - libtiff
-    - libxml2
+    - libxml2-devel
     - openssl
     - zlib
 
