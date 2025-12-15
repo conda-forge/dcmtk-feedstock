@@ -1,5 +1,5 @@
 {% set name = "DCMTK" %}
-{% set version = "3.6.9" %}
+{% set version = "3.7.0" %}
 {% set libraries = [
   "ofstd", "oflog", "dcmdata", "i2d", "dcmimgle", "dcmimage", "ijg8", "ijg12",
   "ijg16", "dcmjpeg", "dcmtkcharls", "dcmjpls", "dcmnet", "dcmtls", "dcmsr",
@@ -14,7 +14,7 @@ package:
 
 source:
   url: https://dicom.offis.de/download/dcmtk/dcmtk{{ version | replace('.','') }}/dcmtk-{{ version }}.tar.gz
-  sha256: b93ff5561244916a6e1e7e3ecccf2e26e6932c4edb5961268401cea7d4ab9c16
+  sha256: f103df876040a4f904f01d2464f7868b4feb659d8cd3f46a5f1f61aa440be415
   patches:
     # CMake doesn't add tiff library to linker on windows for some reason; apply the patch
     # only on windows because either style is incompatible for the other platforms, see
@@ -22,7 +22,7 @@ source:
     - patches/0001-link-to-TIFF-tiff-directly.patch  # [win]
 
 build:
-  number: 1
+  number: 0
   run_exports:
     - {{ pin_subpackage(name|lower, max_pin='x.x') }}
 
