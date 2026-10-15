@@ -13,7 +13,7 @@ libpng:
 libtiff:
 - '4.7'
 libxml2_devel:
-- '2.14'
+- '2.15'
 openssl:
 - '3.5'
 target_platform:
